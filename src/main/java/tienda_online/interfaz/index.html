@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Tienda Online</h1>
+</header>
+<main>
+    <section id="login">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <input type="email" id="correo" placeholder="Correo" required>
+            <input type="password" id="contrasena" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p id="login-error" class="error-message" style="display: none;">Credenciales incorrectas</p>
+        <p>¿No tienes una cuenta? <a href="register.html">Regístrate aquí</a></p>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Tienda Online</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
