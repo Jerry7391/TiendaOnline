@@ -84,3 +84,67 @@ a:hover {
     color: green;
     font-size: 14px;
 }
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #232323;
+    color: #FFFFFF;
+}
+
+header {
+    background-color: #0057FF;
+    padding: 1rem;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+main {
+    padding: 2rem;
+}
+
+.btn-primary {
+    background-color: #0057FF;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: #0FBF69;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.product-card {
+    background-color: #FFFFFF;
+    color: #232323;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    text-align: center;
+}
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f9;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.btn-danger {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #CC0000;
+}

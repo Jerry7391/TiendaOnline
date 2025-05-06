@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moxor - Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Panel de Administrador - Moxor</h1>
+</header>
+<main>
+    <section id="product-management">
+        <h2>Gestión de Productos</h2>
+        <form id="product-form">
+            <input type="text" name="nombre" placeholder="Nombre del producto" required>
+            <textarea name="descripcion" placeholder="Descripción"></textarea>
+            <input type="number" name="precio" placeholder="Precio" required>
+            <input type="number" name="cantidad" placeholder="Cantidad" required>
+            <input type="file" name="imagen" id="imagen" accept="image/*" required>
+            <button type="submit" class="btn-primary">Guardar</button>
+        </form>
+        <div id="message" style="margin-top: 10px; color: red;"></div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2025 Moxor</p>
+</footer>
+
+<script>
+    const productForm = document.getElementById("product-form");
+    const messageDiv = document.getElementById("message");
+
+    productForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Limpiar mensajes previos
+        messageDiv.textContent = "";
+
+        // Crear objeto con los datos del formulario
+        const producto = {
+            nombre: productForm.nombre.value,
+            descripcion: productForm.descripcion.value,
+            precio: parseFloat(productForm.precio.value),
+            cantidad: parseInt(productForm.cantidad.value),
+            imagen: productForm.imagen.files[0]?.name || ""
+        };
+
+        console.log("Enviando producto:", producto);
+
+        try {
+            const response = await fetch("http://localhost:8080/productos", { // Cambia 8081 si tu servidor usa otro puerto
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(producto),
+            });
+
+            console.log("Respuesta del servidor:", response);
+
+            if (response.ok) {
+                const data = await response.json();
+                messageDiv.style.color = "green";
+                messageDiv.textContent = `Producto "${data.nombre}" guardado correctamente.`;
+                productForm.reset();
+            } else {
+                const errorText = await response.text();
+                messageDiv.style.color = "red";
+                messageDiv.textContent = `Error del servidor: ${errorText}`;
+                console.error("Error recibido del servidor:", errorText);
+            }
+        } catch (error) {
+            messageDiv.style.color = "red";
+            messageDiv.textContent = `Error inesperado: ${error.message}`;
+            console.error("Error al enviar el formulario:", error);
+        }
+    });
+</script>
+
+</body>
+</html>
+

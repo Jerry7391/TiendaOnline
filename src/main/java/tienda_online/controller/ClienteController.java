@@ -49,9 +49,12 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
     @PostMapping("/authenticate")
-    public ResponseEntity<Cliente> authenticate(@RequestParam String correo, @RequestParam String contrasena) {
+    public ResponseEntity<?> authenticate(@RequestParam String correo, @RequestParam String contrasena) {
         Optional<Cliente> cliente = clienteService.authenticate(correo, contrasena);
-        return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(401).build());
+        if (cliente.isPresent()) {
+            return ResponseEntity.ok(cliente.get());
+        }
+        return ResponseEntity.status(401).body("Credenciales incorrectas");
     }
     @PostMapping("/register")
     public ResponseEntity<Cliente> register(@Valid @RequestBody Cliente cliente) {
